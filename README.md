@@ -1,5 +1,7 @@
 # Unity 2.5D Tilemap Depth System
 
+![ ](https://thumbs.gfycat.com/LegitimateOldAnemoneshrimp-size_restricted.gif)
+
 Render tilemaps either in front of or behind the player.
 
 Explained in this blog post here:
