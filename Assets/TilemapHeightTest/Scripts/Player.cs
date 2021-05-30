@@ -47,7 +47,9 @@ namespace TilemapHeightTest
 
 			_body.velocity = new Vector2(horiz, vert) * MoveSpeed;
 
-			TileHeightManager.Instance.ReportPosition(transform.position, _sprite.sprite.bounds);
+			foreach (TileHeightManager Instance in TileHeightManager.Instances) {
+				Instance.ReportPosition(transform.position, _sprite.sprite.bounds);
+			}
 		}
 	}
 }
