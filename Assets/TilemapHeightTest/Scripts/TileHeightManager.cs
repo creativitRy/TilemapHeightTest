@@ -1,4 +1,4 @@
-﻿/*
+/*
 MIT License
 
 Copyright (c) 2018 Gahwon Lee
@@ -30,7 +30,7 @@ namespace TilemapHeightTest
 {
 	public class TileHeightManager : MonoBehaviour
 	{
-		public static TileHeightManager Instance { get; set; }
+		public static List<TileHeightManager> Instances { get; set; }
 
 		public List<TileHeightGroup> TileHeightGroups;
 		private readonly Dictionary<Sprite, float> _tileHeights = new Dictionary<Sprite, float>();
@@ -41,7 +41,11 @@ namespace TilemapHeightTest
 
 		private void Awake()
 		{
-			Instance = this;
+			if (Instances == null)
+            {
+				Instances = new List<TileHeightManager>();
+            }
+			Instances.Add(this);
 			
 			if (TileHeightGroups != null)
 			{
@@ -60,6 +64,7 @@ namespace TilemapHeightTest
 			// clear previous overlay tiles
 			foreach (var pos in _returnBack)
 			{
+				Tilemap.SetTile(pos, Overlay.GetTile(pos));
 				Overlay.SetTile(pos, null);
 			}
 			_returnBack.Clear();
@@ -88,8 +93,8 @@ namespace TilemapHeightTest
 						var pos = new Vector3Int(x, y, 0);
 						_returnBack.Add(pos);
 						Overlay.SetTile(pos, Tilemap.GetTile(pos));
+						Tilemap.SetTile(pos, null);
 					}
-					
 				}
 			}
 		}
